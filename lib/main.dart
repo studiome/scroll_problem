@@ -40,6 +40,8 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: SafeArea(
+        top: true,
+        bottom: false,
         child: Stepper(
           currentStep: _index,
           onStepTapped: (int i) {
