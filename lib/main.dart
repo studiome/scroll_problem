@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Step> buildSteps() {
     final steps = <Step>[];
-    for (int i = 0; i < maxStepNumber - 1; i++) {
+    for (int i = 0; i < maxStepNumber; i++) {
       steps.add(
         Step(
           title: Text('Number ${i + 1} item'),
