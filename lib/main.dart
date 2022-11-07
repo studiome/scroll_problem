@@ -36,32 +36,39 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: SafeArea(
-        top: true,
-        bottom: false,
-        child: Stepper(
-          currentStep: _index,
-          onStepTapped: (int i) {
-            setState(() {
-              _index = i;
-            });
-          },
-          onStepCancel: () {
-            if (_index == 0) return;
-            setState(() {
-              _index -= 1;
-            });
-          },
-          onStepContinue: () {
-            if (_index == maxStepNumber - 1) return;
-            setState(() {
-              _index += 1;
-            });
-          },
-          steps: buildSteps(),
+        child: CustomScrollView(
+          slivers: [
+            SliverSafeArea(sliver: SliverAppBar(title: Text(widget.title))),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Stepper(
+                    physics: const ClampingScrollPhysics(),
+                    currentStep: _index,
+                    onStepTapped: (int i) {
+                      setState(() {
+                        _index = i;
+                      });
+                    },
+                    onStepCancel: () {
+                      if (_index == 0) return;
+                      setState(() {
+                        _index -= 1;
+                      });
+                    },
+                    onStepContinue: () {
+                      if (_index == maxStepNumber - 1) return;
+                      setState(() {
+                        _index += 1;
+                      });
+                    },
+                    steps: buildSteps(),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
