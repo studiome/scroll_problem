@@ -79,21 +79,28 @@ class _MyHomePageState extends State<MyHomePage> {
     for (int i = 0; i < maxStepNumber - 1; i++) {
       steps.add(
         Step(
-            title: Text('Number ${i + 1} item'),
-            subtitle: Text(
-                'This is number ${i + 1} item. tap one! Check if Scroll works good. '),
-            content: Container(
-              alignment: Alignment.centerLeft,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Item ${i + 1} - 0'),
-                  Text('Item ${i + 1} - 1'),
-                  Text('Item ${i + 1} - 2'),
-                ],
-              ),
-            )),
+          title: Text('Number ${i + 1} item'),
+          subtitle: Text(
+              'This is number ${i + 1} item. tap one! Check if Scroll works good. '),
+          content: Container(
+            alignment: Alignment.centerLeft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Item ${i + 1} - 0'),
+                Text('Item ${i + 1} - 1'),
+                Text('Item ${i + 1} - 2'),
+              ],
+            ),
+          ),
+          isActive: _index == i,
+          state: (_index == i)
+              ? StepState.editing
+              : (i > _index)
+                  ? StepState.indexed
+                  : StepState.complete,
+        ),
       );
     }
     return steps;
