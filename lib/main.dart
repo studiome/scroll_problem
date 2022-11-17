@@ -30,47 +30,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _index = 0;
+  int index = 0;
   final int maxStepNumber = 15;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text(widget.title)),
       body: SafeArea(
         bottom: false,
-        child: CustomScrollView(
-          slivers: [
-            SliverSafeArea(sliver: SliverAppBar(title: Text(widget.title))),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  Stepper(
-                    physics: const ClampingScrollPhysics(),
-                    currentStep: _index,
-                    onStepTapped: (int i) {
-                      setState(() {
-                        _index = i;
-                      });
-                    },
-                    onStepCancel: () {
-                      if (_index == 0) return;
-                      setState(() {
-                        _index -= 1;
-                      });
-                    },
-                    onStepContinue: () {
-                      if (_index == maxStepNumber - 1) return;
-                      setState(() {
-                        _index += 1;
-                      });
-                    },
-                    steps: buildSteps(),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+        child: Text('Tab-${index + 1}'),
       ),
     );
   }
@@ -95,10 +64,10 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-          isActive: _index == i,
-          state: (_index == i)
+          isActive: index == i,
+          state: (index == i)
               ? StepState.editing
-              : (i > _index)
+              : (i > index)
                   ? StepState.indexed
                   : StepState.complete,
         ),
