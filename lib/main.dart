@@ -14,8 +14,14 @@ class MyApp extends StatelessWidget {
       title: 'Scroll Problem',
       theme: ThemeData(
         useMaterial3: true,
+        brightness: Brightness.light,
         colorSchemeSeed: Colors.blue,
       ),
+      darkTheme: ThemeData(
+          useMaterial3: true,
+          brightness: Brightness.dark,
+          colorSchemeSeed: Colors.blue),
+      themeMode: ThemeMode.system,
       home: const MyHomePage(title: 'Scroll Problem'),
     );
   }
@@ -44,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Text(widget.title),
               bottom: TabBar(
                 isScrollable: true,
-                indicatorColor: Theme.of(context).colorScheme.secondary,
+                indicatorColor: Theme.of(context).colorScheme.surfaceTint,
                 labelColor: Theme.of(context).colorScheme.primary,
                 tabs: buildTabs(),
               )),
