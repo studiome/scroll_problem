@@ -31,22 +31,51 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int index = 0;
-  final int maxStepNumber = 15;
+  final int maxTabNumber = 15;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
-      body: SafeArea(
-        bottom: false,
-        child: Text('Tab-${index + 1}'),
+    return DefaultTabController(
+      initialIndex: 0,
+      length: maxTabNumber,
+      child: Scaffold(
+        appBar: AppBar(
+            title: Text(widget.title),
+            bottom: TabBar(
+              isScrollable: true,
+              indicatorColor: Theme.of(context).colorScheme.secondary,
+              labelColor: Theme.of(context).colorScheme.primary,
+              tabs: buildTabs(),
+            )),
+        body: SafeArea(
+          bottom: false,
+          child: TabBarView(children: buildTabViews()),
+        ),
       ),
     );
   }
 
+  List<Tab> buildTabs() {
+    final tabs = <Tab>[];
+    for (int i = 0; i < maxTabNumber; i++) {
+      tabs.add(Tab(
+        text: 'No. ${i + 1}',
+      ));
+    }
+    return tabs;
+  }
+
+  List<Widget> buildTabViews() {
+    final tabVs = <Widget>[];
+    for (int i = 0; i < maxTabNumber; i++) {
+      tabVs.add(Center(child: Text('Tab-${i + 1}')));
+    }
+    return tabVs;
+  }
+
   List<Step> buildSteps() {
     final steps = <Step>[];
-    for (int i = 0; i < maxStepNumber; i++) {
+    for (int i = 0; i < maxTabNumber; i++) {
       steps.add(
         Step(
           title: Text('Number ${i + 1} item'),
