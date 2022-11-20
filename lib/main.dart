@@ -71,41 +71,38 @@ class _MyHomePageState extends State<MyHomePage> {
     final tabVs = <Widget>[];
     for (int i = 0; i < maxTabNumber; i++) {
       tabVs.add(Center(
-          child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text('Tab-${i + 1}'),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text('Tab-${i + 1}'),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () {
+                  var c = DefaultTabController.of(context);
+                  if (c == null) return;
+                  int index = c.index;
+                  if (index == maxTabNumber - 1) return;
+                  c.animateTo(index + 1);
+                },
+                child: const Text('Next'),
+              ),
+              TextButton(
                   onPressed: () {
                     var c = DefaultTabController.of(context);
                     if (c == null) return;
                     int index = c.index;
-                    if (index == maxTabNumber - 1) return;
-                    c.animateTo(index + 1);
+                    if (index == 0) return;
+                    c.animateTo(index - 1);
                   },
-                  child: const Text('Next'),
-                ),
-                TextButton(
-                    onPressed: () {
-                      var c = DefaultTabController.of(context);
-                      if (c == null) return;
-                      int index = c.index;
-                      if (index == 0) return;
-                      c.animateTo(index - 1);
-                    },
-                    child: const Text('Back')),
-              ],
-            ),
-          ],
-        ),
+                  child: const Text('Back')),
+            ],
+          ),
+        ],
       )));
     }
     return tabVs;
