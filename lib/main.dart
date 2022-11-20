@@ -87,25 +87,35 @@ class _MyHomePageState extends State<MyHomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextButton(
-                onPressed: () {
-                  var c = DefaultTabController.of(context);
-                  if (c == null) return;
-                  int index = c.index;
-                  if (index == maxTabNumber - 1) return;
-                  c.animateTo(index + 1);
-                },
-                child: const Text('Next'),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: ElevatedButton(
+                  onPressed: (i == maxTabNumber - 1)
+                      ? null
+                      : () {
+                          var c = DefaultTabController.of(context);
+                          if (c == null) return;
+                          int index = c.index;
+                          if (index == maxTabNumber - 1) return;
+                          c.animateTo(index + 1);
+                        },
+                  child: const Text('Next'),
+                ),
               ),
-              TextButton(
-                  onPressed: () {
-                    var c = DefaultTabController.of(context);
-                    if (c == null) return;
-                    int index = c.index;
-                    if (index == 0) return;
-                    c.animateTo(index - 1);
-                  },
-                  child: const Text('Back')),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: ElevatedButton(
+                    onPressed: i == 0
+                        ? null
+                        : () {
+                            var c = DefaultTabController.of(context);
+                            if (c == null) return;
+                            int index = c.index;
+                            if (index == 0) return;
+                            c.animateTo(index - 1);
+                          },
+                    child: const Text('Back')),
+              ),
             ],
           ),
         ],
