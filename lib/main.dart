@@ -38,20 +38,22 @@ class _MyHomePageState extends State<MyHomePage> {
     return DefaultTabController(
       initialIndex: 0,
       length: maxTabNumber,
-      child: Scaffold(
-        appBar: AppBar(
-            title: Text(widget.title),
-            bottom: TabBar(
-              isScrollable: true,
-              indicatorColor: Theme.of(context).colorScheme.secondary,
-              labelColor: Theme.of(context).colorScheme.primary,
-              tabs: buildTabs(),
-            )),
-        body: SafeArea(
-          bottom: false,
-          child: TabBarView(children: buildTabViews()),
-        ),
-      ),
+      child: Builder(builder: (context) {
+        return Scaffold(
+          appBar: AppBar(
+              title: Text(widget.title),
+              bottom: TabBar(
+                isScrollable: true,
+                indicatorColor: Theme.of(context).colorScheme.secondary,
+                labelColor: Theme.of(context).colorScheme.primary,
+                tabs: buildTabs(),
+              )),
+          body: SafeArea(
+            bottom: false,
+            child: TabBarView(children: buildTabViews(context)),
+          ),
+        );
+      }),
     );
   }
 
@@ -65,43 +67,47 @@ class _MyHomePageState extends State<MyHomePage> {
     return tabs;
   }
 
-  List<Widget> buildTabViews() {
+  List<Widget> buildTabViews(BuildContext context) {
     final tabVs = <Widget>[];
     for (int i = 0; i < maxTabNumber; i++) {
-      tabVs.add(Center(child: Text('Tab-${i + 1}')));
-    }
-    return tabVs;
-  }
-
-  List<Step> buildSteps() {
-    final steps = <Step>[];
-    for (int i = 0; i < maxTabNumber; i++) {
-      steps.add(
-        Step(
-          title: Text('Number ${i + 1} item'),
-          subtitle: Text(
-              'This is number ${i + 1} item. tap one! Check if Scroll works good. '),
-          content: Container(
-            alignment: Alignment.centerLeft,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      tabVs.add(Center(
+          child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text('Tab-${i + 1}'),
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Item ${i + 1} - 0'),
-                Text('Item ${i + 1} - 1'),
-                Text('Item ${i + 1} - 2'),
+                TextButton(
+                  onPressed: () {
+                    var c = DefaultTabController.of(context);
+                    if (c == null) return;
+                    int index = c.index;
+                    if (index == maxTabNumber - 1) return;
+                    c.animateTo(index + 1);
+                  },
+                  child: const Text('Next'),
+                ),
+                TextButton(
+                    onPressed: () {
+                      var c = DefaultTabController.of(context);
+                      if (c == null) return;
+                      int index = c.index;
+                      if (index == 0) return;
+                      c.animateTo(index - 1);
+                    },
+                    child: const Text('Back')),
               ],
             ),
-          ),
-          isActive: index == i,
-          state: (index == i)
-              ? StepState.editing
-              : (i > index)
-                  ? StepState.indexed
-                  : StepState.complete,
+          ],
         ),
-      );
+      )));
     }
-    return steps;
+    return tabVs;
   }
 }
