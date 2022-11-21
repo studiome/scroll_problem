@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Text('Tab-${i + 1}'),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Padding(
                 padding: const EdgeInsets.all(12.0),
