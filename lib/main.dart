@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: ElevatedButton(
+                child: OutlinedButton(
                   onPressed: (i == maxTabNumber - 1)
                       ? null
                       : () {
@@ -104,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: ElevatedButton(
+                child: OutlinedButton(
                     onPressed: i == 0
                         ? null
                         : () {
