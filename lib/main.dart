@@ -90,6 +90,21 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                      side: BorderSide.none,
+                      backgroundColor:
+                          Theme.of(context).colorScheme.secondaryContainer,
+                      foregroundColor:
+                          Theme.of(context).colorScheme.onSecondaryContainer,
+                      shadowColor: Theme.of(context).colorScheme.shadow,
+                      disabledBackgroundColor: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.12),
+                      disabledForegroundColor: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.38)),
                   onPressed: (i == maxTabNumber - 1)
                       ? null
                       : () {
