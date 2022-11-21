@@ -89,6 +89,20 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(12.0),
+                child: OutlinedButton(
+                    onPressed: i == 0
+                        ? null
+                        : () {
+                            var c = DefaultTabController.of(context);
+                            if (c == null) return;
+                            int index = c.index;
+                            if (index == 0) return;
+                            c.animateTo(index - 1);
+                          },
+                    child: const Text('Back')),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
                 //filled tonal button, switch genuine button if released
                 child: ElevatedButton(
                   style: ButtonStyle(
@@ -146,20 +160,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                   child: const Text('Next'),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: OutlinedButton(
-                    onPressed: i == 0
-                        ? null
-                        : () {
-                            var c = DefaultTabController.of(context);
-                            if (c == null) return;
-                            int index = c.index;
-                            if (index == 0) return;
-                            c.animateTo(index - 1);
-                          },
-                    child: const Text('Back')),
               ),
             ],
           ),
