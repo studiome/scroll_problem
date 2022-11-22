@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Text(widget.title),
               bottom: TabBar(
                 isScrollable: true,
-                indicatorColor: Theme.of(context).colorScheme.surfaceTint,
+                indicatorColor: Theme.of(context).colorScheme.primary,
                 labelColor: Theme.of(context).colorScheme.primary,
                 tabs: buildTabs(),
               )),
